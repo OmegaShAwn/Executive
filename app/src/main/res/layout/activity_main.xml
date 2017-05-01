@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colordarkblue"
+    tools:context="com.example.android.executive.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background1"
+            android:id="@+id/addusers"
+            android:textSize="20sp"
+            android:text="ADD USERS"
+            android:textColor="#fdfdfd"
+            android:layout_margin="4dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background1"
+            android:layout_margin="4dp"
+            android:id="@+id/viewusers"
+            android:text="VIEW USERS"
+            android:textColor="#fdfdfd"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emergencies"
+            android:text="EMERGENCIES"
+            android:background="@color/colorred"
+            android:layout_margin="4dp"
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.android.executive">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Executive"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDoDgq0dV0_bblgqC9jnBA5dhb9g6Bb9DU"/>
+
+        <activity android:name=".EmergencyActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="LocService"
+            android:label="LocService"
+            >
+        </service>
+        <activity android:name=".AddUsersActivity" />
+        <activity android:name=".CreateUserActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ViewUsers" />
+        <activity android:name=".ViewSelectedUsers" />
+        <activity android:name=".Managers_main_activity" />
+        <activity android:name=".Locate"></activity>
+    </application>
+
+</manifest>
