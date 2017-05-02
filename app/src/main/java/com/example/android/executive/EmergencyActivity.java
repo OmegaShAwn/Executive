@@ -62,7 +62,7 @@ public class EmergencyActivity extends AppCompatActivity {
 
         if(!u.equals("")) {
             Toast.makeText(EmergencyActivity.this, username, Toast.LENGTH_LONG).show();
-        };
+        }
 
 
         Intent s= new Intent(EmergencyActivity.this, LocService.class);
@@ -105,10 +105,7 @@ public class EmergencyActivity extends AppCompatActivity {
                         int h=Integer.valueOf(user.emergencyDetails.getSi());
                         if(flagdup==0)
                             if(h==3) {
-                                emergencies.add(user);/*
-                                Log.v("emer", "" + emergencies.get(0).emergencyDetails.getUsername());
-                                Log.v("emer", "" + emergencies.get(0).emergencyDetails.getSi());
-                                Log.v("emer", "" + emergencies.get(0).emergencyDetails.getTi());*/
+                                emergencies.add(user);
                             }
 
                 }
@@ -128,11 +125,7 @@ public class EmergencyActivity extends AppCompatActivity {
                     int h=Integer.valueOf(user.emergencyDetails.getSi());
                     if(flagdup==0)
                         if(h==2) {
-                            emergencies.add(user);/*
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getUsername());
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getSi());
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getTi());
-                        */
+                            emergencies.add(user);
                         }
 
                 }
@@ -152,10 +145,7 @@ public class EmergencyActivity extends AppCompatActivity {
                     int h=Integer.valueOf(user.emergencyDetails.getSi());
                     if(flagdup==0)
                         if(h==1) {
-                            emergencies.add(user);/*
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getUsername());
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getSi());
-                            Log.v("emer", "" + emergencies.get(0).emergencyDetails.getTi());*/
+                            emergencies.add(user);
                         }
 
                 }
@@ -227,19 +217,19 @@ public class EmergencyActivity extends AppCompatActivity {
     }, 2000);
     }
 
-/*    @Override
+    @Override
     public void onResume() {
         super.onResume();
-        Intent i= new Intent(this, LocService.class);
-        stopService(i);
+//        Intent i= new Intent(this, LocService.class);
+//        stopService(i);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Intent i= new Intent(this, LocService.class);
-        startService(i);
-    }*/
+//        Intent i= new Intent(this, LocService.class);
+//        startService(i);
+    }
 
     @Override
     public void onDestroy() {
