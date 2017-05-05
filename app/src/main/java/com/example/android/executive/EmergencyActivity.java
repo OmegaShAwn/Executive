@@ -35,7 +35,7 @@ public class EmergencyActivity extends AppCompatActivity {
     private ListView mMessageListView;
     private EmergenciesAdapter mEmergenciesAdapter;
     int flagdup=0;
-
+    DatabaseReference ref = database.getReference("UserCategories/Doctors");
 
     List<Emergencies> emergencies = new ArrayList<>();
 
@@ -53,22 +53,43 @@ public class EmergencyActivity extends AppCompatActivity {
         String u=settings.getString("lusername","");
         final String username;
 
-        if(hasLoggedIn)
+        if(!hasLoggedIn)
         {
-        }
-        else{
             Intent intent=new Intent(EmergencyActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
 
         if(!isNetworkAvailable())
-            Toast.makeText(getApplicationContext(), "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show();
 
-        username=settings.getString("lusername","nil");
+        username=settings.getString("lusername","");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild(username)){
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                    Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                    finish();
+                    SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = settings.edit();
+
+                    editor.putBoolean("hasLoggedIn",false);
+                    editor.putString("lusername","");
+                    editor.commit();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         if(!u.equals("")) {
-            Toast.makeText(EmergencyActivity.this, username, Toast.LENGTH_LONG).show();
+            Toast.makeText(EmergencyActivity.this, username, Toast.LENGTH_SHORT).show();
         }
 
 
@@ -220,11 +241,11 @@ public class EmergencyActivity extends AppCompatActivity {
     public void onBackPressed()
     {
         if(k==0) {
-            Toast.makeText(getApplicationContext(), "Press Back again to log out", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Press Back again to log out", Toast.LENGTH_SHORT).show();
             k++;
         }
         else{
-            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
             Intent f= new Intent(this, LocService.class);
