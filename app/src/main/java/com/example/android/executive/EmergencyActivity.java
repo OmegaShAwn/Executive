@@ -1,7 +1,10 @@
 package com.example.android.executive;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -58,6 +61,9 @@ public class EmergencyActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        if(!isNetworkAvailable())
+            Toast.makeText(getApplicationContext(), "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show();
 
         username=settings.getString("lusername","nil");
 
@@ -261,5 +267,11 @@ public class EmergencyActivity extends AppCompatActivity {
         /*Intent i= new Intent(this, LocService.class);
         stopService(i);*/
         super.onDestroy();
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
