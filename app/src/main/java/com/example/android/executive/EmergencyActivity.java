@@ -177,6 +177,25 @@ public class EmergencyActivity extends AppCompatActivity {
                         }
 
                 }
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+
+                    Emergencies user = postSnapshot.getValue(Emergencies.class);
+                    Log.v("emer", "" + postSnapshot.getValue(Emergencies.class));
+                    flagdup = 0;
+                    for (int i = 0; i < emergencies.size(); i++)
+                        if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
+                        {
+                            flagdup = 1;
+                            break;
+                        }
+
+                    int h=Integer.valueOf(user.emergencyDetails.getSi());
+                    if(flagdup==0)
+                        if(h==0) {
+                            emergencies.add(user);
+                        }
+
+                }
                 setAdapter();
             }
 
