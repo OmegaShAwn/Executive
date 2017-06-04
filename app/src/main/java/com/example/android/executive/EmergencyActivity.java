@@ -96,7 +96,8 @@ public class EmergencyActivity extends AppCompatActivity {
 //        Intent s= new Intent(EmergencyActivity.this, LocService.class);
 //        startService(s);
 
-        startService(new Intent(this, LocService.class));
+        if(hasLoggedIn)
+            startService(new Intent(this, LocService.class));
 
 
 
