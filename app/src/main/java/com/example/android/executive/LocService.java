@@ -93,7 +93,7 @@ public class LocService extends Service {
         if (q != 0) {
             final Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
-                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("An emergency has arrived")
                     .setContentText("emergencies yet to arrive: " +q)
                     .setSound(alarmSound)
@@ -111,7 +111,7 @@ public class LocService extends Service {
         {
             Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
-                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("An emergency has arrived")
                     .setContentText("No more emergencies yet to arrive.")
                     .setSound(alarmSound)
@@ -135,7 +135,7 @@ public class LocService extends Service {
 
             Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
-                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("New Emergency!")
                     .setContentText("emergencies yet to arrive: " +q)
                     .setContentIntent(pi)
@@ -155,7 +155,7 @@ public class LocService extends Service {
 
         Notification notification = new NotificationCompat.Builder(getApplicationContext())
                 .setTicker("New Emergency")
-                .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Rajagiri Hostpital")
                 .setContentText("No emergencies")
                 .setContentIntent(pi)

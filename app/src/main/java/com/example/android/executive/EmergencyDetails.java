@@ -20,7 +20,11 @@ public class EmergencyDetails {
 
     public void setSi(String si){this.si=si;    }
     public void setTi(String ti){this.ti=ti;}
-    public String getSi(){return si;}
+    public String getSi(){
+        if(si==null)
+            si="0";
+        return si;
+    }
     public String getTi(){return ti;}
     public void setUsername(String username){this.username=username;}
     public String getUsername(){return username;}
