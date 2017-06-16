@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,10 +100,24 @@ public class EmergencyActivity extends AppCompatActivity {
         if(hasLoggedIn)
             startService(new Intent(this, LocService.class));
 
-
-
-
         setContentView(R.layout.activity_emergency);
+
+        final Button B = (Button) findViewById(R.id.button3);
+
+        B.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(B.getText().equals("STOP NOTIFICATION")){
+                    Intent s = new Intent(EmergencyActivity.this, LocService.class);
+                    stopService(s);
+                    B.setText("START NOTIFICATION");
+                }
+                else{
+                    Intent s = new Intent(EmergencyActivity.this, LocService.class);
+                    startService(s);
+                    B.setText("STOP NOTIFICATION");
+                }
+            }});
 
         mMessageListView = (ListView) findViewById(emergencyMessageListView);
 
