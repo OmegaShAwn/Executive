@@ -15,7 +15,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDoDgq0dV0_bblgqC9jnBA5dhb9g6Bb9DU"/>
 
-        <activity android:name=".EmergencyActivity">
+        <activity android:name=".EmergencyActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,13 +29,27 @@
             android:label="LocService"
             >
         </service>
-        <activity android:name=".AddUsersActivity" />
-        <activity android:name=".CreateUserActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ViewUsers" />
-        <activity android:name=".ViewSelectedUsers" />
-        <activity android:name=".Managers_main_activity" />
-        <activity android:name=".Locate"></activity>
+        <activity android:name=".AddUsersActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreateUserActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewUsers"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewSelectedUsers"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Managers_main_activity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Locate"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
