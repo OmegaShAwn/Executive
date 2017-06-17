@@ -2,6 +2,7 @@ package com.example.android.executive;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,19 +33,24 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         TextView mUsername = (TextView)convertView.findViewById(R.id.EmergenciesUsername);
         TextView mseverity = (TextView)convertView.findViewById(R.id.EmergenciesSeverity);
         TextView mtype = (TextView)convertView.findViewById(R.id.EmergenciesType);
+        View v = convertView.findViewById(R.id.view1);
 
 
         final Emergencies emergencies = getItem(position);
 
         String string;
         string="low";
+        v.setBackgroundColor(Color.parseColor("green"));
+
         if(emergencies.emergencyDetails.getSi().equals("2"))
         {
             string="medium";
+            v.setBackgroundColor(Color.parseColor("#ffa500"));
         }
         else if(emergencies.emergencyDetails.getSi().equals("3"))
         {
             string="high";
+            v.setBackgroundColor(Color.parseColor("red"));
         }
 
         String string1="fire";
