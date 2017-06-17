@@ -1,5 +1,6 @@
 package com.example.android.executive;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,6 +85,27 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
             }
         });
 
+        myRef.child(username).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                Intent s=new Intent(Locate.this,EmergencyActivity.class);
+                Toast.makeText(getApplicationContext(),"User logged out",Toast.LENGTH_LONG).show();
+                startActivity(s);
+                finish();
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
 
     }
 
@@ -266,6 +289,7 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
             MarkerOptions markerOptions = new MarkerOptions();
 
             // Traversing through all the routes
+            if(result!=null)
             for(int i=0;i<result.size();i++){
                 points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
@@ -291,9 +315,18 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            googleMap.addPolyline(lineOptions);
-            distanceTextView.setText("Estimated Time Taken:"+distance);
+            if(lineOptions!=null) {
+                googleMap.addPolyline(lineOptions);
+                distanceTextView.setText("Estimated Time Taken :" + distance.substring(1, distance.length() - 1));
+            }
         }
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        startActivity(new Intent(this,EmergencyActivity.class));
+        finish();
+        super.onBackPressed();
+    }
 }

@@ -146,12 +146,12 @@ public class EmergencyActivity extends AppCompatActivity {
                             break;
                         }
 
-                        int h=Integer.valueOf(user.emergencyDetails.getSi());
-                        if(flagdup==0)
-                            if(h==3) {
+                        if(flagdup==0 && user.emergencyDetails!=null) {
+                            int h = Integer.valueOf(user.emergencyDetails.getSi());
+                            if (h == 3) {
                                 emergencies.add(user);
                             }
-
+                        }
                 }
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -166,12 +166,13 @@ public class EmergencyActivity extends AppCompatActivity {
                             break;
                         }
 
-                    int h=Integer.valueOf(user.emergencyDetails.getSi());
-                    if(flagdup==0)
-                        if(h==2) {
+
+                    if(flagdup==0 && user.emergencyDetails!=null) {
+                        int h = Integer.valueOf(user.emergencyDetails.getSi());
+                        if (h == 2) {
                             emergencies.add(user);
                         }
-
+                    }
                 }
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
@@ -186,12 +187,13 @@ public class EmergencyActivity extends AppCompatActivity {
                             break;
                         }
 
-                    int h=Integer.valueOf(user.emergencyDetails.getSi());
-                    if(flagdup==0)
-                        if(h==1) {
+                    if(flagdup==0 && user.emergencyDetails!=null) {
+
+                        int h = Integer.valueOf(user.emergencyDetails.getSi());
+                        if (h == 1) {
                             emergencies.add(user);
                         }
-
+                    }
                 }
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
@@ -205,12 +207,14 @@ public class EmergencyActivity extends AppCompatActivity {
                             break;
                         }
 
-                    int h=Integer.valueOf(user.emergencyDetails.getSi());
-                    if(flagdup==0)
-                        if(h==0) {
+                    if(flagdup==0 && user.emergencyDetails!=null) {
+
+                        int h = Integer.valueOf(user.emergencyDetails.getSi());
+
+                        if (h == 0) {
                             emergencies.add(user);
                         }
-
+                    }
                 }
                 setAdapter();
             }
@@ -264,6 +268,7 @@ public class EmergencyActivity extends AppCompatActivity {
                 TextView username =(TextView)view.findViewById(R.id.EmergenciesUsername);
                 intent.putExtra("user",username.getText().toString());
                 startActivity(intent);
+                finish();
 
 //                mEmergenciesAdapter.remove(mEmergenciesAdapter);
 
