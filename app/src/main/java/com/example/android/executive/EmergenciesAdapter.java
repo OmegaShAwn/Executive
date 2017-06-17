@@ -40,17 +40,17 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
 
         String string;
         string="low";
-        v.setBackgroundColor(Color.parseColor("green"));
+        v.setBackgroundColor(Color.parseColor("#ff99cc00"));
 
         if(emergencies.emergencyDetails.getSi().equals("2"))
         {
             string="medium";
-            v.setBackgroundColor(Color.parseColor("#ffa500"));
+            v.setBackgroundColor(Color.parseColor("#ffffbb33"));
         }
         else if(emergencies.emergencyDetails.getSi().equals("3"))
         {
             string="high";
-            v.setBackgroundColor(Color.parseColor("red"));
+            v.setBackgroundColor(Color.parseColor("#ffff4444"));
         }
 
         String string1="fire";
