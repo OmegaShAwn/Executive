@@ -115,9 +115,16 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
             googleMap.clear();
             LatLng coordinate = new LatLng(loc.getLatitude(),loc.getLongitude());
             googleMap.addMarker(new MarkerOptions().position(coordinate));
-            if(firstTime==0){firstTime++;
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(coordinate,17.0f);
-                googleMap.moveCamera(cameraUpdate);}
+
+            float f;
+            if(firstTime != 0)
+                f=googleMap.getCameraPosition().zoom;
+            else {
+                f = 17.0f;
+                firstTime++;
+            }
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(coordinate, f);
+            googleMap.moveCamera(cameraUpdate);
 
             String url = getDirectionsUrl(coordinate, destination);
 
