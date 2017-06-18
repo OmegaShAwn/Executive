@@ -62,8 +62,12 @@ public class LocService extends Service {
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
 
                 q++;
+                int s;
                 Emergencies user = dataSnapshot.getValue(Emergencies.class);
-                int s = Integer.valueOf(user.emergencyDetails.getSi());
+                if(user.emergencyDetails!=null)
+                    s = Integer.valueOf(user.emergencyDetails.getSi());
+                else
+                    s=0;
                 if(s==3)
                     ns++;
                 showNotification();
@@ -79,8 +83,12 @@ public class LocService extends Service {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
                 q--;
+                int s;
                 Emergencies user = dataSnapshot.getValue(Emergencies.class);
-                int s = Integer.valueOf(user.emergencyDetails.getSi());
+                if(user.emergencyDetails!=null)
+                    s = Integer.valueOf(user.emergencyDetails.getSi());
+                else
+                    s=0;
                 if(s==3)
                     ns--;
                 showNot();
