@@ -29,7 +29,7 @@ public class LocService extends Service {
     DatabaseReference myRef;
 
     Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    int q;
+    int q,ns;
     int white=0xfdfdfd;
 
 
@@ -46,6 +46,7 @@ public class LocService extends Service {
 
 
         q=0;
+        ns=0;
         myRef = database.getReference("Emergencies");
 
 
@@ -61,6 +62,10 @@ public class LocService extends Service {
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
 
                 q++;
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                int s = Integer.valueOf(user.emergencyDetails.getSi());
+                if(s==3)
+                    ns++;
                 showNotification();
 
             }
@@ -74,6 +79,10 @@ public class LocService extends Service {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
 
                 q--;
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                int s = Integer.valueOf(user.emergencyDetails.getSi());
+                if(s==3)
+                    ns--;
                 showNot();
 
             }
@@ -90,12 +99,11 @@ public class LocService extends Service {
 
         final PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), EmergencyActivity.class), 0);
 
-        if (q != 0) {
             Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("An emergency has arrived")
-                    .setContentText("emergencies yet to arrive: " +q)
+                    .setContentText("Emergencies: " +q+" | Highly severe cases: "+ns)
                     .setSound(alarmSound)
                     .setContentIntent(pi)
                     .setColor(white)
@@ -105,27 +113,6 @@ public class LocService extends Service {
 
 
             startForeground(1337, notification);
-
-        }
-        else
-        {
-            Notification notification = new NotificationCompat.Builder(getApplicationContext())
-                    .setTicker("New Emergency")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentTitle("An emergency has arrived")
-                    .setContentText("No more emergencies yet to arrive.")
-                    .setSound(alarmSound)
-                    .setContentIntent(pi)
-                    .setColor(white)
-                    .setAutoCancel(true)
-                    .build();
-
-
-
-
-            startForeground(1337, notification);
-        }
-
     }
 
 
@@ -137,7 +124,7 @@ public class LocService extends Service {
                     .setTicker("New Emergency")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("New Emergency!")
-                    .setContentText("emergencies yet to arrive: " +q)
+                    .setContentText("Emergencies: " +q+" | Highly severe cases: "+ns)
                     .setContentIntent(pi)
                     .setColor(white)
                     .setSound(alarmSound)
