@@ -91,7 +91,7 @@ public class LocService extends Service {
         final PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), EmergencyActivity.class), 0);
 
         if (q != 0) {
-            final Notification notification = new NotificationCompat.Builder(getApplicationContext())
+            Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentTitle("An emergency has arrived")
