@@ -109,7 +109,7 @@ public class LocService extends Service {
 
             Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_stat_untitled)
                     .setContentTitle("An emergency has arrived")
                     .setContentText("Emergencies: " +q+" | Highly severe cases: "+ns)
                     .setSound(alarmSound)
@@ -130,7 +130,7 @@ public class LocService extends Service {
 
             Notification notification = new NotificationCompat.Builder(getApplicationContext())
                     .setTicker("New Emergency")
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_stat_untitled)
                     .setContentTitle("New Emergency!")
                     .setContentText("Emergencies: " +q+" | Highly severe cases: "+ns)
                     .setContentIntent(pi)
@@ -150,7 +150,7 @@ public class LocService extends Service {
 
         Notification notification = new NotificationCompat.Builder(getApplicationContext())
                 .setTicker("New Emergency")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_stat_untitled)
                 .setContentTitle("Rajagiri Hostpital")
                 .setContentText("No emergencies")
                 .setContentIntent(pi)
