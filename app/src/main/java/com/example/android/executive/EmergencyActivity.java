@@ -1,11 +1,13 @@
 package com.example.android.executive;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,8 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.example.android.executive.R.id.emergencyMessageListView;
 
@@ -278,40 +278,36 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
     }
-    int k=0;
-
     @Override
     public void onBackPressed()
     {
-        if(k==0) {
-            Toast.makeText(getApplicationContext(), "Press Back again to log out", Toast.LENGTH_SHORT).show();
-            k++;
-        }
-        else{
-            Toast.makeText(getApplicationContext(),"Logged Out",Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
-            Intent f= new Intent(this, LocService.class);
-            stopService(f);
-            SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
-            SharedPreferences.Editor editor = settings.edit();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to log out?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
 
-//Set "hasLoggedIn" to true
-            editor.putBoolean("hasLoggedIn", false);
-            editor.putString("lusername","");
 
-// Commit the edits!
-            editor.commit();
-            // code here to show dialog
-            super.onBackPressed();  // optional depending on your needs
-        }new Timer().schedule(new TimerTask() {
-        @Override
-        public void run() {
-            k=0;
-        }
-    }, 2000);
+                        Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0); // 0 - for private mode
+                        SharedPreferences.Editor editor = settings.edit();
+
+                        editor.putBoolean("hasLoggedIn", false);
+                        editor.putString("lusername","");
+
+                        editor.commit();
+                        startActivity(i);
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+        builder.show();
+
     }
-
     @Override
     public void onResume() {
         super.onResume();
