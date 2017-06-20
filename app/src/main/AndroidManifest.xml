@@ -13,9 +13,10 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDoDgq0dV0_bblgqC9jnBA5dhb9g6Bb9DU"/>
+            android:value="AIzaSyDoDgq0dV0_bblgqC9jnBA5dhb9g6Bb9DU" />
 
-        <activity android:name=".EmergencyActivity"
+        <activity
+            android:name=".EmergencyActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -24,32 +25,40 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
-            android:name="LocService"
-            android:label="LocService"
-            >
-        </service>
-        <activity android:name=".AddUsersActivity"
+            android:name=".LocService"
+            android:label="LocService"></service>
+
+        <activity
+            android:name=".AddUsersActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".CreateUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CreateUserActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ViewUsers"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewUsers"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ViewSelectedUsers"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ViewSelectedUsers"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Managers_main_activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Managers_main_activity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Locate"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Locate"
             android:configChanges="orientation"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".logList"></activity>
     </application>
 
 </manifest>
