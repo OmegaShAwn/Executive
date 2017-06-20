@@ -286,6 +286,8 @@ public class EmergencyActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
+                        Intent s = new Intent(EmergencyActivity.this, LocService.class);
+                        stopService(s);
 
                         Toast.makeText(getApplicationContext(), "Logged Out", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
