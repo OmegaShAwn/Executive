@@ -39,9 +39,14 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         final Emergencies emergencies = getItem(position);
 
         String string;
-        string="low";
-        v.setBackgroundColor(Color.parseColor("#ff99cc00"));
+        string="Not Specified";
+        v.setBackgroundColor(getContext().getResources().getColor(R.color.colordarkblue));
 
+        if(emergencies.emergencyDetails.getSi().equals("1"))
+        {
+            string="low";
+            v.setBackgroundColor(Color.parseColor("#ff99cc00"));
+        }
         if(emergencies.emergencyDetails.getSi().equals("2"))
         {
             string="medium";
@@ -53,7 +58,11 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
             v.setBackgroundColor(Color.parseColor("#ffff4444"));
         }
 
-        String string1="fire";
+        String string1="Not Specified";
+        if(emergencies.emergencyDetails.getTi().equals("1"))
+        {
+            string1="fire";
+        }
         if(emergencies.emergencyDetails.getTi().equals("2"))
         {
             string1="pregnancy";
