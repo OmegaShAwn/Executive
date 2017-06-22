@@ -7,23 +7,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.32"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:text="Reported By:"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/EmergenciesName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -33,23 +34,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.41"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:text="Username:"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/EmergenciesUsername"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -59,14 +61,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.39"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.82"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:text="No. of Casuality"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -74,9 +76,9 @@
 
         <TextView
             android:id="@+id/no"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4.58"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -86,14 +88,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.51"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:text="Severity:"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -101,9 +104,9 @@
 
         <TextView
             android:id="@+id/EmergenciesSeverity"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -113,14 +116,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="0.51"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.64"
+            android:layout_weight="0.5"
             android:gravity="left"
             android:text="Type:"
             android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -128,9 +131,9 @@
 
         <TextView
             android:id="@+id/EmergenciesType"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:gravity="left"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -141,7 +144,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_weight="0.51"
-        android:background="@color/colorgreen" />
+        android:background="@color/colorPrimaryDark" />
 
 
 </LinearLayout>

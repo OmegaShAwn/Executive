@@ -6,24 +6,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.84"
+            android:layout_weight="0.5"
+            android:gravity="left"
             android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:layout_weight=".5"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
 
@@ -32,24 +33,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.57"
+            android:layout_weight="0.5"
+            android:gravity="left"
             android:text="Username"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.98"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:layout_weight="0.5"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
 
@@ -58,25 +60,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight=".5"
+            android:gravity="left"
             android:text="Password"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
         <TextView
             android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.67"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:layout_weight=".5"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
     </LinearLayout>
@@ -84,50 +87,52 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal">
 
         <TextView
 
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="left"
             android:text="Phone Number"
-            android:layout_weight="0.29"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
         <TextView
             android:id="@+id/phno"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.92"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:layout_weight=".5"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="1"
         android:orientation="horizontal"
         android:id="@+id/specialLinearLayout">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:gravity="left"
             android:text="Specialization"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
 
         <TextView
             android:id="@+id/special"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2.68"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            />
+            android:layout_weight=".5"
+            android:gravity="left"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </LinearLayout>
 
