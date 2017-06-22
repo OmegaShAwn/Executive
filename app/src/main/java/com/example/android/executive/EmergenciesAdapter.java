@@ -33,6 +33,7 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         TextView mUsername = (TextView)convertView.findViewById(R.id.EmergenciesUsername);
         TextView mseverity = (TextView)convertView.findViewById(R.id.EmergenciesSeverity);
         TextView mtype = (TextView)convertView.findViewById(R.id.EmergenciesType);
+        TextView no = (TextView)convertView.findViewById(R.id.no);
         View v = convertView.findViewById(R.id.view1);
 
 
@@ -84,6 +85,11 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
             string1="other";
         }
 
+        String string2;
+        if(emergencies.emergencyDetails.getno().equals("0"))
+            string2="Not Specified";
+        else
+            string2=emergencies.emergencyDetails.getno();
         mName.setText(""+emergencies.emergencyDetails.getUsername());
         Log.v("emer","");
         mUsername.setText(""+emergencies.emergencyDetails.getUsername());
@@ -92,7 +98,7 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         Log.v("emer","");
         mtype.setText(""+string1);
         Log.v("emer","");
-
+        no.setText(string2);
 
 
 
