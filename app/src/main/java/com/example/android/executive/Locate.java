@@ -71,7 +71,7 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
                     loc = postSnapshot.getValue(LocationDetails.class);
                 }
 
-                if(loc.getLatitude()!=null) {
+                if(loc!=null) {
 
                     setMap();
                 }
