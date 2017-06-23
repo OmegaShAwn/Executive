@@ -1,10 +1,9 @@
 package com.example.android.executive;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,15 +35,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Locate extends AppCompatActivity implements OnMapReadyCallback {
+public class Locate extends Activity implements OnMapReadyCallback {
 
     MapView mapView;
     GoogleMap googleMap;
     String username;
     int firstTime=0;
     String distance;
-    LocationDetails loc;
+    public LocationDetails loc;
     TextView distanceTextView;
+    ChildEventListener clistener = null;
     LatLng destination = new LatLng(10.0876,76.3882);
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Emergencies");
@@ -63,25 +63,42 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
 
         mapView.getMapAsync(this);
 
-        myRef.child(username).addChildEventListener(new ChildEventListener() {
+        clistener = myRef.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {}
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                if(dataSnapshot!=null) {
+                    Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                    if (user.emergencyDetails.getUsername().equals(username)) {
+                        if (dataSnapshot.child("locationDetails") != null) {
+                            loc = dataSnapshot.child("locationDetails").getValue(LocationDetails.class);
+                            setMap();
+                        } else
+                            Toast.makeText(Locate.this, "Location not received yet", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                if(dataSnapshot!=null)
-                    loc = dataSnapshot.getValue(LocationDetails.class);
-                if(loc!=null)
-                    setMap();
-                else
-                    Toast.makeText(Locate.this,"Location not received yet",Toast.LENGTH_LONG).show();
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                if (user.emergencyDetails.getUsername().equals(username)) {
+                    if(dataSnapshot.child("locationDetails")!=null) {
+                        loc = dataSnapshot.child("locationDetails").getValue(LocationDetails.class);
+                        setMap();
+                    }
+                    else
+                        Toast.makeText(Locate.this,"Current Location not received",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Toast.makeText(getApplicationContext(),"User logged out",Toast.LENGTH_SHORT).show();
-                myRef.removeEventListener(this);
-                finish();
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                if (user.emergencyDetails.getUsername().equals(username)) {
+                    Toast.makeText(getApplicationContext(), "User logged out", Toast.LENGTH_SHORT).show();
+                    myRef.removeEventListener(clistener);
+                    finish();
+                }
             }
 
             @Override
@@ -90,32 +107,31 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-
     }
 
     public void setMap(){
         if(googleMap!=null){
             MapsInitializer.initialize(Locate.this);
             googleMap.clear();
-            LatLng coordinate = new LatLng(loc.getLatitude(),loc.getLongitude());
-            googleMap.addMarker(new MarkerOptions().position(coordinate));
 
-            float f;
-            if(firstTime != 0)
-                f=googleMap.getCameraPosition().zoom;
-            else {
-                f = 17.0f;
-                firstTime++;
+            LatLng coordinate = null;
+            if(loc!=null) {
+                coordinate = new LatLng(loc.getLatitude(), loc.getLongitude());
+                googleMap.addMarker(new MarkerOptions().position(coordinate));
+
+                if (firstTime == 0) {
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(coordinate, 17.0f);
+                    googleMap.moveCamera(cameraUpdate);
+                    firstTime++;
+                }
+
+                String url = getDirectionsUrl(coordinate, destination);
+
+                DownloadTask downloadTask = new DownloadTask();
+
+                // Start downloading json data from Google Directions API
+                downloadTask.execute(url);
             }
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(coordinate, f);
-            googleMap.moveCamera(cameraUpdate);
-
-            String url = getDirectionsUrl(coordinate, destination);
-
-            DownloadTask downloadTask = new DownloadTask();
-
-            // Start downloading json data from Google Directions API
-            downloadTask.execute(url);
         }
     }
 
@@ -150,6 +166,7 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
 
 
     }
+
     private String getDirectionsUrl(LatLng origin,LatLng dest){
 
         // Origin of route
@@ -281,42 +298,41 @@ public class Locate extends AppCompatActivity implements OnMapReadyCallback {
 
             // Traversing through all the routes
             if(result!=null)
-            for(int i=0;i<result.size();i++){
-                points = new ArrayList<LatLng>();
-                lineOptions = new PolylineOptions();
+                for(int i=0;i<result.size();i++){
+                    points = new ArrayList<LatLng>();
+                    lineOptions = new PolylineOptions();
 
-                // Fetching i-th route
-                List<HashMap<String, String>> path = result.get(i);
+                    // Fetching i-th route
+                    List<HashMap<String, String>> path = result.get(i);
 
-                // Fetching all the points in i-th route
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
+                    // Fetching all the points in i-th route
+                    for(int j=0;j<path.size();j++){
+                        HashMap<String,String> point = path.get(j);
 
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
+                        double lat = Double.parseDouble(point.get("lat"));
+                        double lng = Double.parseDouble(point.get("lng"));
+                        LatLng position = new LatLng(lat, lng);
 
-                    points.add(position);
+                        points.add(position);
+                    }
+
+                    // Adding all the points in the route to LineOptions
+                    lineOptions.addAll(points);
+                    lineOptions.width(8);
+                    lineOptions.color(Color.BLUE);
                 }
-
-                // Adding all the points in the route to LineOptions
-                lineOptions.addAll(points);
-                lineOptions.width(8);
-                lineOptions.color(Color.BLUE);
-            }
 
             // Drawing polyline in the Google Map for the i-th route
             if(lineOptions!=null) {
                 googleMap.addPolyline(lineOptions);
-                distanceTextView.setText("Estimated Time Taken :" + distance.substring(1, distance.length() - 1));
+                String s = "Estimated Time Taken :" + distance.substring(1, distance.length() - 1);
+                distanceTextView.setText(s);
             }
         }
     }
-
     @Override
-    public void onBackPressed()
-    {
-        startActivity(new Intent(this,EmergencyActivity.class));
+    public void onBackPressed() {
+        myRef.removeEventListener(clistener);
         finish();
         super.onBackPressed();
     }

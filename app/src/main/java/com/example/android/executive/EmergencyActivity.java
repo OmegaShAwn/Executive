@@ -9,7 +9,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -35,7 +34,7 @@ public class EmergencyActivity extends AppCompatActivity {
     DatabaseReference myRef;
     private ListView mMessageListView;
     private EmergenciesAdapter mEmergenciesAdapter;
-    int flagdup=0;
+
     DatabaseReference ref = database.getReference("UserCategories/Doctors");
 
     List<Emergencies> emergencies = new ArrayList<>();
@@ -142,117 +141,17 @@ public class EmergencyActivity extends AppCompatActivity {
             }});
 
         mMessageListView = (ListView) findViewById(emergencyMessageListView);
-
+        setAdapter();
 
 
         myRef = database.getReference("Emergencies");
 
-        myRef.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                emergencies.clear();
-
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    Emergencies user = postSnapshot.getValue(Emergencies.class);
-                    Log.v("emer", "" + postSnapshot.getValue(Emergencies.class));
-                    flagdup = 0;
-                    for (int i = 0; i < emergencies.size(); i++)
-                        if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
-                        {
-                            flagdup = 1;
-                            break;
-                        }
-
-                        if(flagdup==0 && user.emergencyDetails!=null) {
-                            int h = Integer.valueOf(user.emergencyDetails.getSi());
-                            if (h == 3) {
-                                emergencies.add(user);
-                            }
-                        }
-                }
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    Emergencies user = postSnapshot.getValue(Emergencies.class);
-                    Log.v("emer", "" + postSnapshot.getValue(Emergencies.class));
-                    flagdup = 0;
-                    for (int i = 0; i < emergencies.size(); i++)
-                        if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
-                        {
-                            flagdup = 1;
-                            break;
-                        }
-
-
-                    if(flagdup==0 && user.emergencyDetails!=null) {
-                        int h = Integer.valueOf(user.emergencyDetails.getSi());
-                        if (h == 2) {
-                            emergencies.add(user);
-                        }
-                    }
-                }
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    Emergencies user = postSnapshot.getValue(Emergencies.class);
-                    Log.v("emer", "" + postSnapshot.getValue(Emergencies.class));
-                    flagdup = 0;
-                    for (int i = 0; i < emergencies.size(); i++)
-                        if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
-                        {
-                            flagdup = 1;
-                            break;
-                        }
-
-                    if(flagdup==0 && user.emergencyDetails!=null) {
-
-                        int h = Integer.valueOf(user.emergencyDetails.getSi());
-                        if (h == 1) {
-                            emergencies.add(user);
-                        }
-                    }
-                }
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    Emergencies user = postSnapshot.getValue(Emergencies.class);
-                    Log.v("emer", "" + postSnapshot.getValue(Emergencies.class));
-                    flagdup = 0;
-                    for (int i = 0; i < emergencies.size(); i++)
-                        if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
-                        {
-                            flagdup = 1;
-                            break;
-                        }
-
-                    if(flagdup==0 && user.emergencyDetails!=null) {
-
-                        int h = Integer.valueOf(user.emergencyDetails.getSi());
-
-                        if (h == 0) {
-                            emergencies.add(user);
-                        }
-                    }
-                }
-                setAdapter();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
         myRef.addChildEventListener(new ChildEventListener() {
-            int i;
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                i++;
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                emergencies.add(user);
+                mEmergenciesAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -260,11 +159,11 @@ public class EmergencyActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                i--;
-                if(i==0) {
-                    emergencies.clear();
-                    mEmergenciesAdapter.notifyDataSetChanged();
-                }
+                Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                for(int i=0; i< emergencies.size(); i++)
+                    if(emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
+                        emergencies.remove(i);
+                mEmergenciesAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -290,7 +189,6 @@ public class EmergencyActivity extends AppCompatActivity {
                 TextView username =(TextView)view.findViewById(R.id.EmergenciesUsername);
                 intent.putExtra("user",username.getText().toString());
                 startActivity(intent);
-                finish();
 
 //                mEmergenciesAdapter.remove(mEmergenciesAdapter);
 
