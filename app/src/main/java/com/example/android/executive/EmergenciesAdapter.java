@@ -62,19 +62,19 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         String string1="Not Specified";
         if(emergencies.emergencyDetails.getTi().equals("1"))
         {
-            string1="fire";
+            string1="Neural";
         }
         if(emergencies.emergencyDetails.getTi().equals("2"))
         {
-            string1="pregnancy";
+            string1="Pregnancy";
         }
         if(emergencies.emergencyDetails.getTi().equals("3"))
         {
-            string1="heart";
+            string1="Heart Attack";
         }
         if(emergencies.emergencyDetails.getTi().equals("4"))
         {
-            string1="accident";
+            string1="Vehicle Accident";
         }
         if(emergencies.emergencyDetails.getTi().equals("5"))
         {
@@ -82,7 +82,7 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         }
         if(emergencies.emergencyDetails.getTi().equals("6"))
         {
-            string1="other";
+            string1="Other";
         }
 
         String string2;
