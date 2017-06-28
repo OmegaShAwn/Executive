@@ -1,12 +1,18 @@
 package com.example.android.executive;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -166,6 +172,32 @@ public class EmergencyActivity extends AppCompatActivity {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 if(dataSnapshot!=null) {
                     Emergencies user = dataSnapshot.getValue(Emergencies.class);
+                    if(user.locationDetails!=null){
+                        Location endloc = new Location("endloc");
+                        Location destloc = new Location("destloc");
+                        endloc.setLatitude(user.locationDetails.getLatitude());
+                        endloc.setLongitude(user.locationDetails.getLongitude());
+                        destloc.setLatitude(10.0876);
+                        destloc.setLongitude(76.3882);
+                        if(destloc.distanceTo(endloc)>1000){
+
+                            Intent i= new Intent(getApplicationContext(),logList.class);
+                            NotificationManager notificationManager =
+                                    (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
+
+                            final PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, i, 0);
+                            Notification notification = new NotificationCompat.Builder(getApplicationContext())
+                                    .setTicker("Emergency Cancelled")
+                                    .setSmallIcon(R.drawable.ic_stat_untitled)
+                                    .setContentTitle("Emergency cancelled")
+                                    .setContentText(user.emergencyDetails.getUsername()+" has cancelled an emergency.")
+                                    .setContentIntent(pi)
+                                    .build();
+
+                            notificationManager.notify(3000,notification);
+
+                        }
+                    }
                     for (int i = 0; i < emergencies.size(); i++)
                         if (emergencies.get(i).emergencyDetails.getUsername().equals(user.emergencyDetails.getUsername()))
                             emergencies.remove(i);
