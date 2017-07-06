@@ -28,7 +28,9 @@
 
         <service
             android:name=".LocService"
-            android:label="LocService"></service>
+            android:label="LocService">
+
+        </service>
 
         <activity
             android:name=".AddUsersActivity"
