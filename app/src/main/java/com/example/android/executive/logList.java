@@ -56,23 +56,23 @@ public class logList extends AppCompatActivity {
                     }
                     if(tE.ti==2)
                     {
-                        string1="pregnancy";
+                        string1="Pregnancy";
                     }
                     if(tE.ti==3)
                     {
-                        string1="heart";
+                        string1="Heart Attack";
                     }
                     if(tE.ti==4)
                     {
-                        string1="accident";
+                        string1="Accident";
                     }
                     if(tE.ti==5)
                     {
-                        string1="head injury";
+                        string1="Head injury";
                     }
                     if(tE.ti==6)
                     {
-                        string1="other";
+                        string1="Other";
                     }
                     emerlist.add(string+" | "+string1+" | "+Integer.toString(tE.dates) + " | " + Integer.toString(tE.months) + " | " + Integer.toString(tE.years) + " || " + Integer.toString(tE.hours) + " : " + Integer.toString(tE.minutes));
                     adapter.notifyDataSetChanged();

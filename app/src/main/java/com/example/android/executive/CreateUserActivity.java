@@ -51,19 +51,18 @@ public class CreateUserActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String userinfo=bundle.getString("user");
 
-        assert userinfo != null;
-        switch (userinfo) {
-            case "ambulance":
-                specialization.setVisibility(View.GONE);
-                myRef = database.getReference("UserCategories/AmbulanceDrivers");
-                break;
-            case "doctor":
-                myRef = database.getReference("UserCategories/Doctors");
+        if(userinfo.equals("ambulance")){
+            specialization.setVisibility(View.GONE);
+             myRef = database.getReference("UserCategories/AmbulanceDrivers");
 
-                break;
-            default:
-                myRef = database.getReference("UserCategories/Otheruser");
-                break;
+
+        }
+        else if(userinfo.equals("doctor")){
+             myRef = database.getReference("UserCategories/Doctors");
+
+        }
+        else{
+            myRef = database.getReference("UserCategories/Otheruser");
         }
 
 
@@ -115,7 +114,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
                 }
 
-                if(flag){
+                if(flag==true){
                     myRef.child(newuser.getUsername()).setValue(newuser);
                     Toast.makeText(CreateUserActivity.this,"Account Created",Toast.LENGTH_LONG).show();
 
