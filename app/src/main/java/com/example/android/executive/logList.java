@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 public class logList extends AppCompatActivity {
 
-    String username;
     ArrayList<String> emerlist = new ArrayList<String>();
 
     @Override
@@ -29,7 +28,6 @@ public class logList extends AppCompatActivity {
         setContentView(R.layout.activity_log_list);
 
         SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
-        username=settings.getString("lusername","");
         final Calendar c= Calendar.getInstance();
         c.add(Calendar.DAY_OF_MONTH, -1);
 
@@ -78,7 +76,7 @@ public class logList extends AppCompatActivity {
                     {
                         string1="other";
                     }
-                    emerlist.add(string+" "+string1+" | "+Integer.toString(tE.dates) + " | " + Integer.toString(tE.months) + " | " + Integer.toString(tE.years) + " || " + Integer.toString(tE.hours) + " : " + Integer.toString(tE.minutes));
+                    emerlist.add(string+" | "+string1+" | "+Integer.toString(tE.dates) + " | " + Integer.toString(tE.months) + " | " + Integer.toString(tE.years) + " || " + Integer.toString(tE.hours) + " : " + Integer.toString(tE.minutes));
                     adapter.notifyDataSetChanged();
                 }
                     }
@@ -114,11 +112,12 @@ public class logList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), details.class);
+                String s = (String)listView.getItemAtPosition(position);
+                String username = s.substring(0,s.indexOf(" | "));
                 intent.putExtra("username",username);
                 intent.putExtra("no", position+1);
                 startActivity(intent);
             }
         });
-
     }
 }
