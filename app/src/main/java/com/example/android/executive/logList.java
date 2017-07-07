@@ -112,8 +112,14 @@ public class logList extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), details.class);
                 String s = (String)listView.getItemAtPosition(position);
                 String username = s.substring(0,s.indexOf(" | "));
+                int no=0;
+                for(int i = 0; i<=position; i++){
+                    if((listView.getItemAtPosition(i)).equals(username)){
+                        no++;
+                    }
+                }
                 intent.putExtra("username",username);
-                intent.putExtra("no", position+1);
+                intent.putExtra("no", no+1);
                 startActivity(intent);
             }
         });
