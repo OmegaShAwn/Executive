@@ -64,16 +64,16 @@ public class details extends AppCompatActivity {
                             t="Head Injury";
                         if(tE.ti==6)
                             t="Other";
-                        ti.setText("Type: "+t);
+                        ti.setText(String.format("Type: %s", t));
                             t="Low";
                         if(tE.si==2)
                             t="Medium";
                         if(tE.si==3)
                             t="High";
                         if(tE.dest==1)
-                            dest.setText("The patient was taken elsewhere due to high criticality.");
-                        si.setText("Severity: "+t);
-                        no.setText("Number: "+tE.no);
+                            dest.setText(R.string.destelse);
+                        si.setText(String.format("Severity: %s", t));
+                        no.setText(String.format(getString(R.string.number), tE.no));
                         i.putExtra("lat",tE.lat);
                         i.putExtra("lon",tE.lon);
                         i.putExtra("late",tE.late);

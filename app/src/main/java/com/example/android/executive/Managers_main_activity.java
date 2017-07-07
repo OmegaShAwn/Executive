@@ -24,10 +24,7 @@ public class Managers_main_activity extends AppCompatActivity {
 
         final String username;
 
-        if(hasLoggedIn)
-        {
-        }
-        else{
+        if (!hasLoggedIn) {
             Intent intent=new Intent(Managers_main_activity.this,MainActivity.class);
             startActivity(intent);
         }

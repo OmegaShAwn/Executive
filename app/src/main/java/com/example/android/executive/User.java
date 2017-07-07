@@ -1,9 +1,5 @@
 package com.example.android.executive;
 
-/**
- * Created by RoshanJoy on 16-03-2017.
- */
-
 public class User {
 
     public String name;
@@ -13,25 +9,6 @@ public class User {
     public String speciality;
 
     public User(){
-
-    }
-
-
-    public User(String name, String password,String username,Long phno) {
-        this.name=name;
-        this.password=password;
-        this.username=username;
-        this.phno=phno;
-        // ...
-    }
-
-    public User(String name, String password,String username,Long phno,String speciality) {
-        this.name=name;
-        this.password=password;
-        this.username=username;
-        this.phno=phno;
-        this.speciality=speciality;
-        // ...
     }
 
     public String getname(){return name;}
@@ -53,7 +30,5 @@ public class User {
     public void setSpeciality(String speciality){this.speciality=speciality;}
 
     public String getSpeciality(){return this.speciality;}
-
-
 
 }

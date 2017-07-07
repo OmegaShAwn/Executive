@@ -1,7 +1,6 @@
 package com.example.android.executive;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,21 +19,20 @@ import java.util.Calendar;
 
 public class logList extends AppCompatActivity {
 
-    ArrayList<String> emerlist = new ArrayList<String>();
+    ArrayList<String> emerlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_list);
 
-        SharedPreferences settings = getSharedPreferences(MainActivity.PREFS_NAME, 0);
         final Calendar c= Calendar.getInstance();
         c.add(Calendar.DAY_OF_MONTH, -1);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference ref = database.getReference("UserCategories/AmbulanceDrivers");
 
-        final ArrayAdapter adapter = new ArrayAdapter<String>(logList.this, R.layout.listview, R.id.label, emerlist);
+        final ArrayAdapter adapter = new ArrayAdapter<>(logList.this, R.layout.listview, R.id.label, emerlist);
         final ListView listView = (ListView) findViewById(R.id.logs);
         listView.setAdapter(adapter);
 

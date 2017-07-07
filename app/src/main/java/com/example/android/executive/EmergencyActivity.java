@@ -106,7 +106,7 @@ public class EmergencyActivity extends AppCompatActivity {
 
                     editor.putBoolean("hasLoggedIn",false);
                     editor.putString("lusername","");
-                    editor.commit();
+                    editor.apply();
                 }
 
             }
@@ -140,12 +140,12 @@ public class EmergencyActivity extends AppCompatActivity {
                 if(B.getText().equals("STOP NOTIFICATION")){
                     Intent s = new Intent(EmergencyActivity.this, LocService.class);
                     stopService(s);
-                    B.setText("START NOTIFICATION");
+                    B.setText(R.string.startnot);
                 }
                 else{
                     Intent s = new Intent(EmergencyActivity.this, LocService.class);
                     startService(s);
-                    B.setText("STOP NOTIFICATION");
+                    B.setText(R.string.stopnot);
                 }
             }});
 
@@ -253,7 +253,7 @@ public class EmergencyActivity extends AppCompatActivity {
                         editor.putBoolean("hasLoggedIn", false);
                         editor.putString("lusername","");
 
-                        editor.commit();
+                        editor.apply();
                         startActivity(i);
 
                     }

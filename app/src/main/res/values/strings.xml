@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Managers</string>
+    <string name="destelse">The patient was taken elsewhere due to unknown reasons.</string>
+    <string name="number">Number: %d</string>
+    <string name="startnot">START NOTIFICATION</string>
+    <string name="stopnot">STOP NOTIFICATION</string>
 </resources>

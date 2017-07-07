@@ -3,6 +3,7 @@ package com.example.android.executive;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +13,20 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by RoshanJoy on 20-03-2017.
+  Created by RoshanJoy on 20-03-2017.
  */
 
-public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
+class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
 
-    public EmergenciesAdapter(Context context, int resource, List<Emergencies> objects) {
+    EmergenciesAdapter(Context context, int resource, List<Emergencies> objects) {
 
         super(context, resource, objects );
     }
 
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.item_emergency_message, parent, false);
         }
@@ -43,6 +45,7 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
         string="Not Specified";
         v.setBackgroundColor(getContext().getResources().getColor(R.color.colordarkblue));
 
+        assert emergencies != null;
         if(emergencies.emergencyDetails.getSi().equals("1"))
         {
             string="low";
@@ -92,11 +95,11 @@ public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
             string2=emergencies.emergencyDetails.getno();
 //        mName.setText(""+emergencies.emergencyDetails.getUsername());
         Log.v("emer","");
-        mUsername.setText(""+emergencies.emergencyDetails.getUsername());
+        mUsername.setText(String.format("%s", emergencies.emergencyDetails.getUsername()));
         Log.v("emer","");
-        mseverity.setText(""+string);
+        mseverity.setText(String.format("%s", string));
         Log.v("emer","");
-        mtype.setText(""+string1);
+        mtype.setText(String.format("%s", string1));
         Log.v("emer","");
         no.setText(string2);
 

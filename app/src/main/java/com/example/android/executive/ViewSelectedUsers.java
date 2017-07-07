@@ -16,8 +16,6 @@ import java.util.List;
 
 public class ViewSelectedUsers extends AppCompatActivity {
 
-    private ListView mMessageListView;
-    private MessageAdapter mMessageAdapter;
     List<User> users = new ArrayList<>();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -31,22 +29,25 @@ public class ViewSelectedUsers extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String userinfo=bundle.getString("user");
 
-        mMessageListView = (ListView) findViewById(R.id.messageListView);
+        ListView mMessageListView = (ListView) findViewById(R.id.messageListView);
 
 
 
 
-        if(userinfo.equals("ambulance")){
+        if("ambulance".equals(userinfo)){
 
             myRef = database.getReference("UserCategories/AmbulanceDrivers");
 
         }
-        else if(userinfo.equals("doctor")){
-            myRef = database.getReference("UserCategories/Doctors");
+        else {
+            assert userinfo != null;
+            if(userinfo.equals("doctor")){
+                myRef = database.getReference("UserCategories/Doctors");
 
-        }
-        else{
-            myRef = database.getReference("UserCategories/Otheruser");
+            }
+            else{
+                myRef = database.getReference("UserCategories/Otheruser");
+            }
         }
 
 
@@ -70,7 +71,7 @@ public class ViewSelectedUsers extends AppCompatActivity {
 
             }
         });
-        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, users,userinfo);
+        MessageAdapter mMessageAdapter = new MessageAdapter(this, R.layout.item_message, users, userinfo);
 
         mMessageListView.setAdapter(mMessageAdapter);
 
