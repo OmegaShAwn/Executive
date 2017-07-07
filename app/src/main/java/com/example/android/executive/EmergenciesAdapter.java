@@ -16,9 +16,9 @@ import java.util.List;
   Created by RoshanJoy on 20-03-2017.
  */
 
-class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
+public class EmergenciesAdapter  extends ArrayAdapter<Emergencies>{
 
-    EmergenciesAdapter(Context context, int resource, List<Emergencies> objects) {
+    public EmergenciesAdapter(Context context, int resource, List<Emergencies> objects) {
 
         super(context, resource, objects );
     }

@@ -15,10 +15,14 @@ import android.widget.TextView;
 
 import java.util.List;
 
-class MessageAdapter extends ArrayAdapter<User> {
-    private String cuser;
+public class MessageAdapter extends ArrayAdapter<User> {
+    String cuser;
+    public MessageAdapter(Context context, int resource, List<User> objects) {
 
-    MessageAdapter(Context context, int resource, List<User> objects, String cuser) {
+        super(context, resource, objects );
+    }
+
+    public MessageAdapter(Context context, int resource, List<User> objects,String cuser) {
 
         super(context, resource, objects );
         this.cuser=cuser;

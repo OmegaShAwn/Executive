@@ -16,6 +16,8 @@ import java.util.List;
 
 public class ViewSelectedUsers extends AppCompatActivity {
 
+    private ListView mMessageListView;
+    private MessageAdapter mMessageAdapter;
     List<User> users = new ArrayList<>();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -29,7 +31,7 @@ public class ViewSelectedUsers extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final String userinfo=bundle.getString("user");
 
-        ListView mMessageListView = (ListView) findViewById(R.id.messageListView);
+        mMessageListView = (ListView) findViewById(R.id.messageListView);
 
 
 
@@ -71,7 +73,7 @@ public class ViewSelectedUsers extends AppCompatActivity {
 
             }
         });
-        MessageAdapter mMessageAdapter = new MessageAdapter(this, R.layout.item_message, users, userinfo);
+        mMessageAdapter = new MessageAdapter(this, R.layout.item_message, users,userinfo);
 
         mMessageListView.setAdapter(mMessageAdapter);
 
